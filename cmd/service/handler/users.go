@@ -8,17 +8,17 @@ import (
 	"github.com/erumble/go-api-boilerplate/pkg/logger"
 )
 
-type PDUserClient interface {
+type pdUserClient interface {
 	ListUsers(o pagerduty.ListUsersOptions) (*pagerduty.ListUsersResponse, error)
 }
 
-func listUsersHandler(pdClient PDUserClient, log logger.LeveledLogger) http.HandlerFunc {
+func listUsersHandler(pdClient pdUserClient, log logger.LeveledLogger) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		listUsers(w, r, pdClient, log)
 	}
 }
 
-func listUsers(w http.ResponseWriter, r *http.Request, pdClient PDUserClient, log logger.LeveledLogger) {
+func listUsers(w http.ResponseWriter, r *http.Request, pdClient pdUserClient, log logger.LeveledLogger) {
 	resp, err := pdClient.ListUsers(pagerduty.ListUsersOptions{})
 	if err != nil {
 		log.Error(err)
