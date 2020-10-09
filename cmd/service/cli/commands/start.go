@@ -4,6 +4,7 @@ import (
 	"context"
 	"time"
 
+	"github.com/PagerDuty/go-pagerduty"
 	"github.com/erumble/go-api-boilerplate/cmd/service/cli"
 	"github.com/erumble/go-api-boilerplate/cmd/service/handler"
 	"github.com/erumble/go-api-boilerplate/pkg/logger"
@@ -14,6 +15,8 @@ import (
 type startCmd struct {
 	LogLevel string `short:"l" long:"log-level" env:":LOG_LEVEL" default:"debug" required:"false" description:"The log level to use" choice:"debug" choice:"info" choice:"error"`
 	Port     int    `short:"p" long:"port"      env:"PORT"       default:"8080" required:"false" description:"The port on which the service listens"`
+
+	APIKey string `long:"pd-api-key" env:"PD_API_KEY" required:"true" description:"API Key for PagerDuty"`
 }
 
 func init() {
@@ -37,10 +40,12 @@ func (cmd startCmd) Execute(_ []string) error {
 	defer log.Sync()
 	log.Debug("DEBUG logging enabled")
 
+	pdClient := pagerduty.NewClient(cmd.APIKey)
+
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-	h := handler.New(cancel, log)
+	h := handler.New(pdClient, log)
 	h.WithMiddleware(httplogger.HTTPLogger)
 	s := server.New(h, cmd.Port, 5*time.Second, log)
 

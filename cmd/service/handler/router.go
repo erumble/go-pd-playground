@@ -1,8 +1,9 @@
 package handler
 
 import (
-	"context"
 	"net/http"
+
+	"github.com/PagerDuty/go-pagerduty"
 
 	"github.com/erumble/go-api-boilerplate/pkg/logger"
 	"github.com/gorilla/mux"
@@ -18,9 +19,12 @@ type router struct {
 	*mux.Router
 }
 
+// TODO: make interface for pagerduty.Client
+
 // New registers the routes and middleware for the server and returns an http handler
-func New(cancel context.CancelFunc, log logger.LeveledLogger) Router {
+func New(pdClient *pagerduty.Client, log logger.LeveledLogger) Router {
 	r := mux.NewRouter()
+	r.HandleFunc("/listusers", listUsersHandler(pdClient, log))
 	r.PathPrefix("/").Handler(echoHandler(log))
 	return &router{r}
 }

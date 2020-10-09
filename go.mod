@@ -3,6 +3,7 @@ module github.com/erumble/go-api-boilerplate
 go 1.15
 
 require (
+	github.com/PagerDuty/go-pagerduty v1.3.0
 	github.com/gorilla/mux v1.8.0
 	github.com/jessevdk/go-flags v1.4.0
 	go.uber.org/zap v1.16.0
