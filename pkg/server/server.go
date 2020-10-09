@@ -86,7 +86,7 @@ func (s *server) Serve(ctx context.Context) error {
 	select {
 	case <-quit:
 		s.log.Debug("Interrupt signal received")
-		s.stop(ctx)
+		errs = append(errs, s.stop(ctx))
 
 	// errg.Wait() will call the context's cancel funcion in the event of an error
 	case <-ctx.Done():
@@ -108,13 +108,18 @@ func (s *server) stop(ctx context.Context) error {
 	defer cancel()
 
 	s.log.Info("Shutting down server")
-	return s.Shutdown(shutdownCtx)
+
+	// Ignore context.Cancelled errors
+	if err := s.Shutdown(shutdownCtx); err != nil && err != context.Canceled {
+		return err
+	}
+	return nil
 }
 
 func flattenErrors(errs []error) error {
 	points := []string{}
 	for _, err := range errs {
-		if err != nil {
+		if err != nil && err != http.ErrServerClosed {
 			points = append(points, fmt.Sprintf("* %s", err))
 		}
 	}
@@ -123,5 +128,5 @@ func flattenErrors(errs []error) error {
 		return nil
 	}
 
-	return fmt.Errorf("%d errors occurred:\n\t%s", len(errs), strings.Join(points, "\n\t"))
+	return fmt.Errorf("%d errors occurred:\n\t%s", len(points), strings.Join(points, "\n\t"))
 }

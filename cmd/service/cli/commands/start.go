@@ -7,6 +7,7 @@ import (
 	"github.com/erumble/go-api-boilerplate/cmd/service/cli"
 	"github.com/erumble/go-api-boilerplate/cmd/service/handler"
 	"github.com/erumble/go-api-boilerplate/pkg/logger"
+	"github.com/erumble/go-api-boilerplate/pkg/middleware/httplogger"
 	"github.com/erumble/go-api-boilerplate/pkg/server"
 )
 
@@ -40,6 +41,7 @@ func (cmd startCmd) Execute(_ []string) error {
 	defer cancel()
 
 	h := handler.New(cancel, log)
+	h.WithMiddleware(httplogger.HTTPLogger)
 	s := server.New(h, cmd.Port, 5*time.Second, log)
 
 	return s.Serve(ctx)
