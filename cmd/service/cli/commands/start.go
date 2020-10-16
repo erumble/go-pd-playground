@@ -5,11 +5,11 @@ import (
 	"time"
 
 	"github.com/PagerDuty/go-pagerduty"
-	"github.com/erumble/go-api-boilerplate/cmd/service/cli"
-	"github.com/erumble/go-api-boilerplate/cmd/service/handler"
-	"github.com/erumble/go-api-boilerplate/pkg/logger"
-	"github.com/erumble/go-api-boilerplate/pkg/middleware/httplogger"
-	"github.com/erumble/go-api-boilerplate/pkg/server"
+	"github.com/erumble/go-pd-playground/cmd/service/cli"
+	"github.com/erumble/go-pd-playground/cmd/service/handler"
+	"github.com/erumble/go-pd-playground/pkg/logger"
+	"github.com/erumble/go-pd-playground/pkg/middleware/httplogger"
+	"github.com/erumble/go-pd-playground/pkg/server"
 )
 
 type startCmd struct {

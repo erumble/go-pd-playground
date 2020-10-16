@@ -5,8 +5,8 @@ import (
 	"fmt"
 
 	"github.com/PagerDuty/go-pagerduty"
-	"github.com/erumble/go-api-boilerplate/cmd/service/cli"
-	"github.com/erumble/go-api-boilerplate/pkg/logger"
+	"github.com/erumble/go-pd-playground/cmd/service/cli"
+	"github.com/erumble/go-pd-playground/pkg/logger"
 )
 
 type listUserCmd struct {

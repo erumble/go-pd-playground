@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/erumble/go-api-boilerplate/pkg/logger"
+	"github.com/erumble/go-pd-playground/pkg/logger"
 	"golang.org/x/sync/errgroup"
 )
 

@@ -3,7 +3,7 @@ package handler
 import (
 	"net/http"
 
-	"github.com/erumble/go-api-boilerplate/pkg/logger"
+	"github.com/erumble/go-pd-playground/pkg/logger"
 )
 
 func echoHandler(log logger.LeveledLogger) http.HandlerFunc {

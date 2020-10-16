@@ -1,4 +1,4 @@
-module github.com/erumble/go-api-boilerplate
+module github.com/erumble/go-pd-playground
 
 go 1.15
 

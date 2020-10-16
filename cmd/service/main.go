@@ -3,8 +3,8 @@ package main
 import (
 	"log"
 
-	"github.com/erumble/go-api-boilerplate/cmd/service/cli"
-	_ "github.com/erumble/go-api-boilerplate/cmd/service/cli/commands"
+	"github.com/erumble/go-pd-playground/cmd/service/cli"
+	_ "github.com/erumble/go-pd-playground/cmd/service/cli/commands"
 )
 
 func main() {

@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/PagerDuty/go-pagerduty"
-	"github.com/erumble/go-api-boilerplate/pkg/logger"
+	"github.com/erumble/go-pd-playground/pkg/logger"
 )
 
 type pdUserClient interface {
