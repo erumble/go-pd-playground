@@ -10,6 +10,7 @@ import (
 
 type pdUserClient interface {
 	ListUsers(o pagerduty.ListUsersOptions) (*pagerduty.ListUsersResponse, error)
+	GetUser(id string, o pagerduty.GetUserOptions) (*pagerduty.User, error)
 }
 
 func listUsersHandler(pdClient pdUserClient, log logger.LeveledLogger) http.HandlerFunc {
@@ -26,5 +27,4 @@ func listUsers(w http.ResponseWriter, r *http.Request, pdClient pdUserClient, lo
 
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(resp)
-
 }

@@ -95,7 +95,7 @@ func newZapSugaredLogger(logLevel string) *zap.SugaredLogger {
 	}
 
 	// Always good to let everyone know what the log level is set to.
-	sugaredLogger.Infof("Log level set to: %s", atom.Level())
+	// sugaredLogger.Infof("Log level set to: %s", atom.Level())
 
 	return sugaredLogger
 }
